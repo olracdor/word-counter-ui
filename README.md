@@ -19,26 +19,17 @@ done it before)
 * Clone Word Counter UI 
     * git clone https://github.com/olracdor/word-counter-ui.git
 
-### Build the API
+### Build the UI
 
 On the root folder, run below commands in terminal/bash
 
-Build the dotnet API 
+Build the reactjs app 
 
 ```bash
 npm run build
 ```
 
 This compiles the files to a production distributable and can be hosted to any web server you prefer.
-
-Build the docker image 
-**Coming soon**
-
-**Azure container registry sample**
-
-```bash
-docker build -t  wordcounter.azurecr.io/word-counter-ui .
-```
 
 ## Run and Test
 
