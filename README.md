@@ -19,9 +19,15 @@ done it before)
 * Clone Word Counter UI 
     * git clone https://github.com/olracdor/word-counter-ui.git
 
+
 ### Build the UI
 
 On the root folder, run below commands in terminal/bash
+
+Install dependencies
+```bash
+npm install
+```
 
 Build the reactjs app 
 
@@ -32,6 +38,12 @@ npm run build
 This compiles the files to a production distributable and can be hosted to any web server you prefer.
 
 ## Run and Test
+
+
+Install dependencies **if have not done yet**
+```bash
+npm install
+```
 
 Run the UI locally using NPM
 
