@@ -8,30 +8,46 @@ import {
 }
   from '../../services/WordsService';
 import CardsWithImageLoader from '../../components/CardDefaultLoader';
-import CardDefault, { CardDefaultProps } from '../../components/CardDefault';
 import {style} from './Style';
 import {initialState} from './Context';
-import { TextField } from '@material-ui/core';
+import { TextField, Snackbar } from '@material-ui/core';
 import DefaultButton from '../../components/DefaultButton';
+import CardBadged from '../../components/CardBadged';
 
 export default function WordCounter() {
   const styles = style();
 
   const [website, setWebsite] = useState(initialState.website);
-  const [words, setWords] = useState(initialState.words);
+  const [wordsresponse, setWordsresponse] = useState(initialState.wordsresponse);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({
+    show: false,
+    message: ''
+  });
 
   useEffect(() => {
   }, []);
   
-  const handleCreateWordCountsAndGetResults = async (promotionId: string) => {
+  const handleCreateWordCountsAndGetResults = async () => {
     setIsLoading(true);
-    const response = await createWordCountsAndGetResults(website);
-    setWords(response.data);
-    setIsLoading(false);
-
+    try{
+      const response = await createWordCountsAndGetResults(website);
+      setWordsresponse(response.data);
+      setIsLoading(false);
+      
+    }catch(error){
+      setIsLoading(false);
+      setWordsresponse(initialState.wordsresponse);
+      setError({
+        show: true,
+        message: 'No Results!'
+      });
+    }
   }
-
+  const handleCloseErrorPopUp = () => {
+    setError({ show: false,
+      message: ''});
+  };
   const handleOnUrlChange = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setWebsite({
       url: e.target.value
@@ -39,6 +55,11 @@ export default function WordCounter() {
   }
   return (
       <div className={styles.root}>
+         <Snackbar
+        open={error.show}
+        onClose={handleCloseErrorPopUp}
+        message={error.message}
+      />
         <Paper className={styles.paper}>
           <Grid container spacing={2}>
             <Grid item>
@@ -64,11 +85,11 @@ export default function WordCounter() {
           />
         </Paper>
           {isLoading ? (<CardsWithImageLoader/>) :
-            (words.map((wordObj: any) => 
-            <CardDefault 
-            title={wordObj.word} 
+            (wordsresponse.words.map((wordObj: any) => 
+            <CardBadged 
+            title={wordsresponse.average > wordObj.count ? wordObj.word.toLowerCase() : wordObj.word.toUpperCase() } 
             content={wordObj.count} 
-            url={website.url}/>
+            url="Word"/>
             ))}
       </div>
   );

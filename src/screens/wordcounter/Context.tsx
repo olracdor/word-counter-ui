@@ -3,20 +3,26 @@ export interface Website {
 }
 
 export interface Word {
-  key: string;
   word: string;
   count: number;
+}
+
+export interface WordsResponse {
   average: number;
+  words: Array<Word>;
 }
 
 export interface WordsState {
   website: Website;
-  words: Array<Word>;
+  wordsresponse: WordsResponse;
 }
 
 export const initialState: WordsState = {
   website: {
     url: ""
   },
-  words: []
+  wordsresponse: {
+    average: 0,
+    words: []
+  }
 };

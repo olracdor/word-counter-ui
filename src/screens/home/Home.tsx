@@ -42,7 +42,7 @@ export default function Home() {
             <CardDefault 
             title={word.word} 
             content={word.count.toString()} 
-            url={word.partitionKey}/>
+            url={word.partitionKey.replace(/-/g,"/")}/>
             ))}
       </div>
   );
