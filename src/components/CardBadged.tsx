@@ -51,22 +51,11 @@ export interface CardDefaultProps {
 export default function CardBadged(props: CardDefaultProps) {
   const styles = useStyles();
   const {title, content, url} = props;
-
-  return (<Paper className={styles.paper}>
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm container>
-        <Grid item xs container direction="column" spacing={2}>
-          <Grid item xs>
-          <Badge badgeContent={content} color="primary" >
-  <Typography>{title}</Typography>
-</Badge>
-            
-          </Grid>
-        </Grid>
-        <Grid item>
-          <MoreHorizIcon />
-        </Grid>
-      </Grid>
-    </Grid>
-    </Paper>);
+  return (<React.Fragment>
+        <Badge badgeContent={content} color="primary" max={999}>
+          <Typography><div style={{fontSize: (parseInt(content))} as React.CSSProperties}>{title}</div></Typography>
+        </Badge>
+        <Grid>&nbsp;&nbsp;</Grid>
+        </React.Fragment>
+  );
 }

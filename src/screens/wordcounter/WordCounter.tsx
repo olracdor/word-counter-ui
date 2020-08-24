@@ -13,6 +13,7 @@ import {initialState} from './Context';
 import { TextField, Snackbar } from '@material-ui/core';
 import DefaultButton from '../../components/DefaultButton';
 import CardBadged from '../../components/CardBadged';
+import CardPlainLoader from '../../components/CardPlainLoader';
 
 export default function WordCounter() {
   const styles = style();
@@ -84,7 +85,7 @@ export default function WordCounter() {
             autoFocus
           />
         </Paper>
-          {isLoading ? (<CardsWithImageLoader/>) :
+          {isLoading ? (<CardPlainLoader/>) :
             (wordsresponse.words.map((wordObj: any) => 
             <CardBadged 
             title={wordsresponse.average > wordObj.count ? wordObj.word.toLowerCase() : wordObj.word.toUpperCase() } 
